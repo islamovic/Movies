@@ -79,13 +79,11 @@
 		A6C7894E23D7B61000FEFACF /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				A6C7897A23D9B04D00FEFACF /* Resources */,
 				A6C7894F23D7B61100FEFACF /* AppDelegate.swift */,
 				A6C7895123D7B61100FEFACF /* SceneDelegate.swift */,
 				A6C7895323D7B61100FEFACF /* ViewController.swift */,
 				A6C7895523D7B61100FEFACF /* Main.storyboard */,
-				A6C7895823D7B61300FEFACF /* Assets.xcassets */,
-				A6C7895A23D7B61300FEFACF /* LaunchScreen.storyboard */,
-				A6C7895D23D7B61300FEFACF /* Info.plist */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -97,6 +95,16 @@
 				A6C7896823D7B61300FEFACF /* Info.plist */,
 			);
 			path = MoviesTests;
+			sourceTree = "<group>";
+		};
+		A6C7897A23D9B04D00FEFACF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A6C7895823D7B61300FEFACF /* Assets.xcassets */,
+				A6C7895A23D7B61300FEFACF /* LaunchScreen.storyboard */,
+				A6C7895D23D7B61300FEFACF /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW46WHVYZR;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movies/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -382,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW46WHVYZR;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movies/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
