@@ -17,6 +17,7 @@ protocol MoviesSceneDisplayView: class {
 // MARK: - Interactor
 protocol MoviesSceneBusinessLogic: class {
     func fetchMovies()
+    func filterMovies(_ request: MoviesScene.Filter.Request)
 }
 
 // MARK: - Presenter
@@ -38,8 +39,17 @@ enum MoviesScene {
 
 extension MoviesScene {
     enum Fetch {}
+    enum Filter {}
 }
 
 extension MoviesScene.Fetch {
+    typealias Response = Result<[Movie], CustomError>
+}
+
+extension MoviesScene.Filter {
+    struct Request {
+        let query: String
+    }
+
     typealias Response = Result<[Movie], CustomError>
 }

@@ -40,4 +40,8 @@ extension MoviesSceneInteractor {
             }
         }
     }
+
+    func filterMovies(_ request: MoviesScene.Filter.Request) {
+        // TODO: Search logic here
+    }
 }
