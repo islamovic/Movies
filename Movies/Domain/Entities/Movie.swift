@@ -19,4 +19,12 @@ struct Movie: Decodable {
     let cast: [String]
     let genres: [String]
     let rating: Int
+
+    init() {
+        title = ""
+        year = 0
+        cast = []
+        genres = []
+        rating = 0
+    }
 }

@@ -26,7 +26,7 @@ extension MoviesScenePresenter {
         switch response {
             case .success(let movies):
                 let viewModel = movies.map {
-                    MoviesScene.ViewModel(title: $0.title)
+                    MoviesScene.ViewModel(movie: $0)
                 }
                 displayView?.display(movies: viewModel)
             case .error(let error):

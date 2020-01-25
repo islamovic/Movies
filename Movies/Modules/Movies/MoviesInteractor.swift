@@ -15,11 +15,12 @@ class MoviesSceneInteractor: MoviesSceneBusinessLogic, MoviesSceneDataStore {
     var worker = MovieWorker()
 
     // MARK: Data Store
-    var movies: [Movie] = []
+    var movies: [Movie]
 
     // MARK: Initializers
     required init(presenter: MoviesScenePresentingLogic) {
         self.presenter = presenter
+        movies = []
     }
 }
 

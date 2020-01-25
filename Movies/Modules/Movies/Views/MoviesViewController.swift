@@ -16,6 +16,8 @@ class MoviesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     var interactor: MoviesSceneBusinessLogic!
+    var dataStore: MoviesSceneDataStore!
+    var router: MoviesSceneRouter!
 
     var dataSource = [MoviesScene.ViewModel]() {
         didSet {
@@ -39,6 +41,7 @@ extension MoviesViewController: MoviesSceneDisplayView {
     func display(movies: [MoviesScene.ViewModel]) {
         activityIndicator.isHidden = true
         dataSource = movies
+        dataStore.movies = dataSource.map { $0.movie }
     }
 
     func display(error: CustomError) {
@@ -74,13 +77,16 @@ extension MoviesViewController: UITableViewDataSource {
         let identifier = String(describing: MovieCell.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieCell
         let selectedMovie = dataSource[indexPath.row]
-        cell.configure(title: selectedMovie.title)
+        cell.configure(title: selectedMovie.movie.title)
         return cell
     }
 }
 
 extension MoviesViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMovie = dataStore.movies[indexPath.row]
+        router.routeToMovieInfoScene(movie: selectedMovie)
+    }
 }
 
 

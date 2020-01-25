@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="192" id="KGk-i7-Jjw" customClass="MovieInfoCell" customModule="Movies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="187"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="187"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(500) Days of Summer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpK-X0-FDA">
+                        <rect key="frame" x="73" y="8" width="174" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="53" translatesAutoresizingMaskIntoConstraints="NO" id="cgC-tJ-J3w">
+                        <rect key="frame" x="97" y="36.5" width="126" height="20.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2009" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n23-O4-jR4">
+                                <rect key="frame" x="0.0" y="0.0" width="41" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 / 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Stm-J3-z8Q">
+                                <rect key="frame" x="94" y="0.0" width="32" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqq-fr-qRN">
+                        <rect key="frame" x="16" y="65" width="35" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijX-Ij-ZPO">
+                        <rect key="frame" x="16" y="130" width="55" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Romance Comedy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLa-EO-U1O">
+                        <rect key="frame" x="24" y="93.5" width="272" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Romance Comedy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7X6-sy-frR">
+                        <rect key="frame" x="24" y="158.5" width="272" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ijX-Ij-ZPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0Cd-w3-pEf"/>
+                    <constraint firstItem="7X6-sy-frR" firstAttribute="top" secondItem="ijX-Ij-ZPO" secondAttribute="bottom" constant="8" id="3cj-M6-tpF"/>
+                    <constraint firstAttribute="trailing" secondItem="7X6-sy-frR" secondAttribute="trailing" constant="24" id="42c-I9-hCR"/>
+                    <constraint firstItem="ijX-Ij-ZPO" firstAttribute="top" secondItem="RLa-EO-U1O" secondAttribute="bottom" constant="16" id="D9u-s2-2qj"/>
+                    <constraint firstItem="bqq-fr-qRN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="GDH-BV-gIa"/>
+                    <constraint firstItem="cgC-tJ-J3w" firstAttribute="top" secondItem="HpK-X0-FDA" secondAttribute="bottom" constant="8" id="H1b-m1-8zj"/>
+                    <constraint firstItem="bqq-fr-qRN" firstAttribute="top" secondItem="cgC-tJ-J3w" secondAttribute="bottom" constant="8" id="O8v-fh-CPN"/>
+                    <constraint firstItem="cgC-tJ-J3w" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Rvh-rx-3XL"/>
+                    <constraint firstAttribute="trailing" secondItem="RLa-EO-U1O" secondAttribute="trailing" constant="24" id="S3n-wk-ODe"/>
+                    <constraint firstItem="ijX-Ij-ZPO" firstAttribute="top" secondItem="cgC-tJ-J3w" secondAttribute="bottom" priority="750" constant="8" id="Tan-0V-o0O"/>
+                    <constraint firstItem="RLa-EO-U1O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Ucc-jM-2mW"/>
+                    <constraint firstItem="RLa-EO-U1O" firstAttribute="top" secondItem="bqq-fr-qRN" secondAttribute="bottom" constant="8" id="ceT-jj-TgT"/>
+                    <constraint firstItem="HpK-X0-FDA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="h0V-KY-qZF"/>
+                    <constraint firstItem="7X6-sy-frR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="kvc-Mu-sSr"/>
+                    <constraint firstAttribute="bottom" secondItem="7X6-sy-frR" secondAttribute="bottom" constant="8" id="pcP-ye-QZq"/>
+                    <constraint firstItem="HpK-X0-FDA" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="wRe-1J-cy2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="castLabel" destination="RLa-EO-U1O" id="02j-gU-x6a"/>
+                <outlet property="genresLabel" destination="7X6-sy-frR" id="JGo-av-fCz"/>
+                <outlet property="ratingLabel" destination="Stm-J3-z8Q" id="kql-E6-ixC"/>
+                <outlet property="titleLabel" destination="HpK-X0-FDA" id="GYK-zm-vwg"/>
+                <outlet property="yearLabel" destination="n23-O4-jR4" id="FBt-FT-wJt"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="193.52678571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

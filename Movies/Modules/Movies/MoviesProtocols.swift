@@ -6,7 +6,7 @@
 //  Copyright © 2020 App Lineup. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - View
 protocol MoviesSceneDisplayView: class {
@@ -25,15 +25,23 @@ protocol MoviesScenePresentingLogic: class {
     func presentFetchedMovies(_ response: MoviesScene.Fetch.Response)
 }
 
-// MARK: - DataStore
-protocol MoviesSceneDataStore: class {
-    var movies: [Movie] { get }
+// MARK: - Router
+protocol MoviesSceneRoutingLogic: class {
+    var viewController: (MoviesSceneDisplayView & UIViewController)? { get set }
+    var dataStore: MoviesSceneDataStore? { get set }
+
+    func routeToMovieInfoScene(movie: Movie)
 }
 
-// MARK: -Functionalities
+// MARK: - DataStore
+protocol MoviesSceneDataStore: class {
+    var movies: [Movie] { get set }
+}
+
+// MARK: - Functionalities
 enum MoviesScene {
     struct ViewModel {
-        let title: String
+        let movie: Movie
     }
 }
 
