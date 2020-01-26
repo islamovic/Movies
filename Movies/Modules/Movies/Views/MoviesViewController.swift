@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MoviesDelegate: class {
+    func didSelectMovie(_ movie: Movie)
+}
+
 class MoviesViewController: UIViewController {
 
     @IBOutlet var moviesTableView: UITableView!
@@ -18,6 +22,8 @@ class MoviesViewController: UIViewController {
     var interactor: MoviesSceneBusinessLogic!
     var dataStore: MoviesSceneDataStore!
     var router: MoviesSceneRouter!
+
+    weak var delegate: MoviesDelegate?
 
     var dataSource = [MoviesScene.ViewModel]() {
         didSet {
@@ -84,8 +90,12 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMovie = dataStore.movies[indexPath.row]
-        router.routeToMovieInfoScene(movie: selectedMovie)
+        
+        delegate?.didSelectMovie(dataStore.movies[indexPath.row])
+        if let infoViewController = delegate as? MovieInfoViewController,
+            let infoNavigationController = infoViewController.navigationController {
+            splitViewController?.showDetailViewController(infoNavigationController, sender: nil)
+        }
     }
 }
 

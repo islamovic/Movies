@@ -12,17 +12,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         if let windowScene = scene as? UIWindowScene {
 
             let window = UIWindow(windowScene: windowScene)
-            let moviesViewController = MoviesSceneConfigurator.configure()
-            let navigation = UINavigationController(rootViewController: moviesViewController)
-            window.rootViewController = navigation
+
+            let splitViewController = UISplitViewController()
+            let rootViewController = UINavigationController(rootViewController: MoviesSceneConfigurator.configure())
+            let infoViewController = UINavigationController(rootViewController: MovieInfoSceneConfigurator.configure())
+            splitViewController.viewControllers = [rootViewController, infoViewController]
+            splitViewController.delegate = self
+
+            if let moviesViewController = rootViewController.topViewController as? MoviesViewController,
+                let infoViewController = infoViewController.topViewController as? MovieInfoViewController {
+                moviesViewController.delegate = infoViewController
+            }
+
+            splitViewController.preferredDisplayMode = .allVisible
 
             self.window = window
+            window.rootViewController = splitViewController
             window.makeKeyAndVisible()
         }
     }
@@ -54,7 +64,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+}
 
+extension SceneDelegate: UISplitViewControllerDelegate {
+
+    func splitViewController(_ splitViewController: UISplitViewController,
+                             collapseSecondary secondaryViewController:UIViewController,
+                             onto primaryViewController:UIViewController) -> Bool {
+
+        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? MovieInfoViewController else { return false }
+        if ((topAsDetailController.dataStore?.movie) != nil) {
+            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+            return true
+        }
+        return false
+    }
 
 }
 

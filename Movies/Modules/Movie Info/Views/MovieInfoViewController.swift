@@ -17,7 +17,6 @@ class MovieInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor.fetchMoviePhotos(title: dataStore.movie.title)
         setup()
     }
 }
@@ -34,6 +33,14 @@ extension MovieInfoViewController: MovieInfoSceneDisplayView {
 
     func display(error: CustomError) {
         
+    }
+}
+
+extension MovieInfoViewController: MoviesDelegate {
+
+    func didSelectMovie(_ movie: Movie) {
+        dataStore.movie = movie
+        interactor.fetchMoviePhotos(title: dataStore.movie.title)
     }
 }
 
