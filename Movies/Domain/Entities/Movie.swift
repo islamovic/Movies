@@ -12,7 +12,7 @@ struct Movies: Decodable {
     let movies: [Movie]
 }
 
-struct Movie: Decodable {
+class Movie: Decodable {
 
     let title: String
     let year: Int

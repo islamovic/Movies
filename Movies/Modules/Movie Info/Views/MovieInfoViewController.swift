@@ -17,26 +17,33 @@ class MovieInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        interactor.fetchMoviePhotos(title: dataStore.movie.title)
         setup()
-//        movieInfoTableView.reloadData()
     }
 }
 
 extension MovieInfoViewController: MovieInfoSceneDisplayView {
 
-    func display(movies: [MovieInfoScene.ViewModel]) {
+    func display(photos: MovieInfoScene.Fetch.ViewModel) {
+        dataStore.photos = photos.photos
 
+        DispatchQueue.main.async { [weak self] in
+            self?.movieInfoTableView.reloadData()
+        }
     }
 
     func display(error: CustomError) {
-
+        
     }
 }
 
 extension MovieInfoViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if dataStore.photos.count > 0 {
+            return 2
+        }
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,10 +51,27 @@ extension MovieInfoViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = String(describing: MovieInfoCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieInfoCell
-        cell.configure(movie: dataStore.movie)
-        return cell
+        if indexPath.section == 1 {
+            let identifier = String(describing: MoviePhotosCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MoviePhotosCell
+            cell.configure(photos: dataStore.photos)
+            return cell
+        } else {
+            let identifier = String(describing: MovieInfoCell.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieInfoCell
+            cell.configure(movie: dataStore.movie)
+            return cell
+        }
+    }
+}
+
+extension MovieInfoViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return CGFloat(dataStore.photos.count * 50)
+        }
+        return UITableView.automaticDimension
     }
 }
 
@@ -62,13 +86,18 @@ private extension MovieInfoViewController {
         movieInfoTableView.rowHeight = UITableView.automaticDimension
         movieInfoTableView.estimatedRowHeight = 48
 
-        let identifier = String(describing: MovieInfoCell.self)
-        let nib = UINib(nibName: identifier, bundle: nil)
-        movieInfoTableView.register(nib, forCellReuseIdentifier: identifier)
+        register(cell: MovieInfoCell.self)
+        register(cell: MoviePhotosCell.self)
 
         movieInfoTableView.dataSource = self
-
+        movieInfoTableView.delegate = self
         movieInfoTableView.tableFooterView = UIView(frame: .zero)
+    }
+
+    func register(cell: Any) {
+        let identifier = String(describing: cell)
+        let nib = UINib(nibName: identifier, bundle: nil)
+        movieInfoTableView.register(nib, forCellReuseIdentifier: identifier)
     }
 
 }

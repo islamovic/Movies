@@ -10,24 +10,24 @@ import Foundation
 
 // MARK: - View
 protocol MovieInfoSceneDisplayView: class {
-    func display(movies: [MovieInfoScene.ViewModel])
+    func display(photos: MovieInfoScene.Fetch.ViewModel)
     func display(error: CustomError)
 }
 
 // MARK: - Interactor
 protocol MovieInfoSceneBusinessLogic: class {
-//    func fetchMovieInfo()
-//    func filterMovies(_ request: MovieInfoScene.Filter.Request)
+    func fetchMoviePhotos(title: String)
 }
 
 // MARK: - Presenter
 protocol MovieInfoScenePresentingLogic: class {
-//    func presentFetchedMovies(_ response: MovieInfoScene.Fetch.Response)
+    func presentFetchedPhotos(_ response: MovieInfoScene.Fetch.Response)
 }
 
 // MARK: - Data Store
 protocol MovieInfoSceneDataStore: class {
     var movie: Movie { get set }
+    var photos: [Photo] { get set }
 }
 
 // MARK: - Functionalities
@@ -46,5 +46,9 @@ extension MovieInfoScene {
 }
 
 extension MovieInfoScene.Fetch {
-    typealias Response = Result<Movie, CustomError>
+    struct ViewModel {
+        let photos: [Photo]
+    }
+
+    typealias Response = Result<[Photo], CustomError>
 }

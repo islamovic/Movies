@@ -20,5 +20,14 @@ class MovieInfoScenePresenter: MovieInfoScenePresentingLogic {
 }
 
 extension MovieInfoScenePresenter {
+    func presentFetchedPhotos(_ response: MovieInfoScene.Fetch.Response) {
 
+        switch response {
+            case .success(let photos):
+                let viewModel = MovieInfoScene.Fetch.ViewModel(photos: photos)
+                displayView?.display(photos: viewModel)
+            case .error(let error):
+                displayView?.display(error: error)
+        }
+    }
 }
