@@ -32,7 +32,7 @@ extension MovieInfoViewController: MovieInfoSceneDisplayView {
     }
 
     func display(error: CustomError) {
-        
+        showAlert(title: nil, message: error.localizedDescription)
     }
 }
 

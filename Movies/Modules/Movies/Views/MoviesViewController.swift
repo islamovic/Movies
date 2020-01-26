@@ -52,6 +52,7 @@ extension MoviesViewController: MoviesSceneDisplayView {
 
     func display(error: CustomError) {
         activityIndicator.isHidden = true
+        showAlert(title: nil, message: error.localizedDescription)
     }
 }
 
