@@ -91,7 +91,8 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
+        tableView.deselectRow(at: indexPath, animated: true)
         delegate?.didSelectMovie(dataStore.movies[indexPath.row])
         if let infoViewController = delegate as? MovieInfoViewController,
             let infoNavigationController = infoViewController.navigationController {

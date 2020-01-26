@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -66,6 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension SceneDelegate: UISplitViewControllerDelegate {
 
     func splitViewController(_ splitViewController: UISplitViewController,
