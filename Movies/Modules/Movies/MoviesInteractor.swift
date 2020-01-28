@@ -16,6 +16,8 @@ class MoviesSceneInteractor: MoviesSceneBusinessLogic, MoviesSceneDataStore {
 
     // MARK: Data Store
     var movies: [Movie]
+    var searchEnabled: Bool = false
+    var searchResults: [[Int : [Movie]]] = []
 
     // MARK: Initializers
     required init(presenter: MoviesScenePresentingLogic) {
@@ -43,6 +45,21 @@ extension MoviesSceneInteractor {
     }
 
     func filterMovies(_ request: MoviesScene.Filter.Request) {
-        // TODO: Search logic here
+
+        var filteredMovies = [Movie]()
+
+        filteredMovies = movies.filter { $0.title.lowercased().contains(request.query.lowercased()) ||
+            String(describing: $0.year).contains(request.query) }.sorted { $0.rating > $1.rating }
+
+        let grouped = Dictionary(grouping: filteredMovies, by: { $0.year })
+
+        var results: [ [Int: [Movie]] ] = []
+
+        grouped.forEach { (key, value) in
+            results.append([key: Array(value.prefix(5))])
+        }
+
+        let response = MoviesScene.Filter.Response.success(results)
+        presenter.presentFetchedSearchMovies(response)
     }
 }

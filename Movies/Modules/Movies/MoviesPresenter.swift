@@ -25,10 +25,19 @@ extension MoviesScenePresenter {
 
         switch response {
             case .success(let movies):
-                let viewModel = movies.map {
-                    MoviesScene.ViewModel(movie: $0)
-                }
-                displayView?.display(movies: viewModel)
+                let viewModel = MoviesScene.ViewModel(movies: movies)
+                displayView?.display(viewModel: viewModel)
+            case .error(let error):
+                displayView?.display(error: error)
+        }
+    }
+
+    func presentFetchedSearchMovies(_ response: MoviesScene.Filter.Response) {
+
+        switch response {
+            case .success(let groupedMovies):
+                let viewModel = MoviesScene.FilteredViewModel(groupedMovies: groupedMovies)
+                displayView?.display(filteredViewModel: viewModel)
             case .error(let error):
                 displayView?.display(error: error)
         }

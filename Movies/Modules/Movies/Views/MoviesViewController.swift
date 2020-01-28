@@ -25,12 +25,6 @@ class MoviesViewController: UIViewController {
 
     weak var delegate: MoviesDelegate?
 
-    var dataSource = [MoviesScene.ViewModel]() {
-        didSet {
-            moviesTableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,15 +38,23 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: MoviesSceneDisplayView {
 
-    func display(movies: [MoviesScene.ViewModel]) {
+    func display(viewModel: MoviesScene.ViewModel) {
+        dataStore.searchEnabled = false
         activityIndicator.isHidden = true
-        dataSource = movies
-        dataStore.movies = dataSource.map { $0.movie }
+        dataStore.movies = viewModel.movies
+        moviesTableView.reloadData()
     }
 
     func display(error: CustomError) {
+        dataStore.searchEnabled = false
         activityIndicator.isHidden = true
         showAlert(title: nil, message: error.localizedDescription)
+    }
+
+    func display(filteredViewModel: MoviesScene.FilteredViewModel) {
+        dataStore.searchResults = filteredViewModel.groupedMovies
+        dataStore.searchEnabled = true
+        moviesTableView.reloadData()
     }
 }
 
@@ -72,20 +74,51 @@ extension MoviesViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         interactor.filterMovies(MoviesScene.Filter.Request(query: searchBar.text ?? ""))
     }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dataStore.searchEnabled = false
+        interactor.fetchMovies()
+    }
 }
 
 extension MoviesViewController: UITableViewDataSource {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataStore.searchEnabled ? dataStore.searchResults.count : 1
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+
+        if dataStore.searchEnabled, let movies = dataStore.searchResults[section].values.first {
+            return movies.count
+        }
+        return dataStore.movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let identifier = String(describing: MovieCell.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MovieCell
-        let selectedMovie = dataSource[indexPath.row]
-        cell.configure(title: selectedMovie.movie.title)
+        var selectedMovie = Movie()
+
+        if dataStore.searchEnabled, let movies = dataStore.searchResults[indexPath.section].values.first {
+            selectedMovie = movies[indexPath.row]
+        } else {
+            selectedMovie = dataStore.movies[indexPath.row]
+        }
+        cell.configure(title: selectedMovie.title)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if dataStore.searchEnabled, let _ = dataStore.searchResults[section].values.first {
+            return String(dataStore.searchResults[section].keys.first!)
+        }
+        return ""
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return dataStore.searchEnabled ? 44 : 0.1
     }
 }
 
@@ -93,14 +126,17 @@ extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.didSelectMovie(dataStore.movies[indexPath.row])
+        if dataStore.searchEnabled, let movies = dataStore.searchResults[indexPath.section].values.first {
+            delegate?.didSelectMovie(movies[indexPath.row])
+        } else {
+            delegate?.didSelectMovie(dataStore.movies[indexPath.row])
+        }
         if let infoViewController = delegate as? MovieInfoViewController,
             let infoNavigationController = infoViewController.navigationController {
             splitViewController?.showDetailViewController(infoNavigationController, sender: nil)
         }
     }
 }
-
 
 private extension MoviesViewController {
 

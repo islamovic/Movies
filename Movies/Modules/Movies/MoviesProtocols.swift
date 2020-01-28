@@ -10,7 +10,8 @@ import UIKit
 
 // MARK: - View
 protocol MoviesSceneDisplayView: class {
-    func display(movies: [MoviesScene.ViewModel])
+    func display(viewModel: MoviesScene.ViewModel)
+    func display(filteredViewModel: MoviesScene.FilteredViewModel)
     func display(error: CustomError)
 }
 
@@ -23,6 +24,7 @@ protocol MoviesSceneBusinessLogic: class {
 // MARK: - Presenter
 protocol MoviesScenePresentingLogic: class {
     func presentFetchedMovies(_ response: MoviesScene.Fetch.Response)
+    func presentFetchedSearchMovies(_ response: MoviesScene.Filter.Response)
 }
 
 // MARK: - Router
@@ -36,12 +38,18 @@ protocol MoviesSceneRoutingLogic: class {
 // MARK: - DataStore
 protocol MoviesSceneDataStore: class {
     var movies: [Movie] { get set }
+    var searchResults: [[Int: [Movie]]] { get set }
+    var searchEnabled: Bool { get set }
 }
 
 // MARK: - Functionalities
 enum MoviesScene {
     struct ViewModel {
-        let movie: Movie
+        let movies: [Movie]
+    }
+
+    struct FilteredViewModel {
+        let groupedMovies: [[Int: [Movie]]]
     }
 }
 
@@ -59,5 +67,5 @@ extension MoviesScene.Filter {
         let query: String
     }
 
-    typealias Response = Result<[Movie], CustomError>
+    typealias Response = Result<[[Int: [Movie]]], CustomError>
 }
