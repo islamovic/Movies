@@ -12,7 +12,7 @@ struct Movies: Decodable {
     let movies: [Movie]
 }
 
-class Movie: Decodable {
+struct Movie: Decodable {
 
     let title: String
     let year: Int
@@ -26,5 +26,13 @@ class Movie: Decodable {
         cast = []
         genres = []
         rating = 0
+    }
+
+    init(title: String, year: Int) {
+        self.title = title
+        self.year = year
+        self.cast = []
+        self.genres = []
+        self.rating = 0
     }
 }

@@ -8,15 +8,15 @@
 
 import Foundation
 
-class Photos: Decodable {
+struct Photos: Decodable {
     let photos: PhotoModel
 }
 
-class PhotoModel: Decodable {
+struct PhotoModel: Decodable {
     let photo: [Photo]
 }
 
-class Photo: Decodable {
+struct Photo: Decodable {
     let id: String
     let owner: String
     let secret: String

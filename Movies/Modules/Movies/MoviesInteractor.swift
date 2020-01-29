@@ -29,6 +29,11 @@ class MoviesSceneInteractor: MoviesSceneBusinessLogic, MoviesSceneDataStore {
 extension MoviesSceneInteractor {
     func fetchMovies() {
 
+        if !movies.isEmpty {
+            let response = MoviesScene.Fetch.Response.success(movies)
+            self.presenter.presentFetchedMovies(response)
+            return
+        }
         worker.fetchMovies { [weak self] (movies, error) in
 
             guard let `self` = self else { return }
@@ -37,8 +42,8 @@ extension MoviesSceneInteractor {
                 let response = MoviesScene.Fetch.Response.error(error)
                 self.presenter.presentFetchedMovies(response)
             } else {
-                let sortedMovies = movies.sorted { $0.year > $1.year }
-                let response = MoviesScene.Fetch.Response.success(sortedMovies)
+                self.movies = movies.sorted { $0.year > $1.year }
+                let response = MoviesScene.Fetch.Response.success(self.movies)
                 self.presenter.presentFetchedMovies(response)
             }
         }

@@ -58,9 +58,8 @@ extension MoviePhotosCell: UICollectionViewDataSource {
         let identifier = String(describing: PhotoCell.self)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
 
-        let selectedImage = self.photos[indexPath.row]
-        let url = "http://farm\(selectedImage.farm).static.flickr.com/\(selectedImage.server)/\(selectedImage.id)_\(selectedImage.secret).jpg"
-        let imageURL = URL(string: url)!
+        let selectedPhoto = self.photos[indexPath.row]
+        let imageURL = URL(string: Server.photoRequest(photo: selectedPhoto))!
         Nuke.loadImage(with: imageURL, into: cell.moviePhotoImageView)
         return cell
     }
